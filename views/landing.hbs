@@ -1,1 +1,5 @@
-<p>Code works!</p>
+{{#each todos}}
+    <a href="/todo/{{this._id}}">
+        <div>{{this.name}}</div>
+    </a>
+{{/each}}

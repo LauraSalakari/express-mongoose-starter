@@ -1,12 +1,12 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
+require('dotenv').config();
+const express = require('express');
+const app = express();
 var hbs = require('hbs');
-const logger = require('morgan');
-const PORT = process.env.PORT
+const logger = require('morgan'); // morgan logs more details about the requests being made!
+const PORT = process.env.PORT;
 
 //ensure database is connected
-require('./config/db.config')
+require('./config/db.config');
 
 // Register your template engine
 // NOTE: 'view engine' is a keyword here. 
@@ -22,23 +22,31 @@ app.set('views', __dirname + '/views');
 
 // Set up the middleware to make the files inside the public folder
 // available throughout the app
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'));
+
+
+// require the body-parser library to get requests in a manageable form 
+// this is included with node.js! no need to install separately
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //Allows us to see detailed logs in the console
-app.use(logger('dev'));
+app.use(logger('dev')); //morgan set up in the middleware! now we see extra logs in the console 
 
 //Register partials if needed
 //hbs.registerPartials(__dirname + '/views/partials');
 
 
 // Routes here
-app.get('/', (req, res) => {
-    res.render('landing.hbs')
-})
+
+// we tell the middleware where to find our routes
+const todoRoutes = require("./routes/Todo.routes");
+
+app.use("/", todoRoutes);
 
 
 //Start the server to begin listening on a port
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT} `)
-})
+    console.log(`Server is running on port ${PORT} `);
+});

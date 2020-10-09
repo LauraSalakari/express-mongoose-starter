@@ -1,0 +1,16 @@
+{{!-- html forms have a method attribute and an action attribute!!! --}}
+{{!-- we can create another route with the same name to handle the POST request!!!--}}
+{{!-- NOTE! the inputs must have name attributes!!! that gets passed in the POST request--}}
+
+<form method="POST" action="/add-form"> 
+    <h2>Create New Todo</h2>
+    <div class="form-group">
+        <label for="todoName">Todo:</label>
+        <input name="name" type="text" class="form-control" id="todoName">
+    </div>
+    <div class="form-group">
+        <label for="todoDescription">Description</label>
+        <input name="description" type="text" class="form-control" id="todoDescription">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

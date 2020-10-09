@@ -1,8 +1,13 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 //create your schema here
+let TodoSchema = new mongoose.Schema({
+    name: String,
+    description: String
+});
 
 //create your model here
-
+let TodoModel = mongoose.model("myTodo", TodoSchema);
 
 // do not forget to export your model
+module.exports = TodoModel;
